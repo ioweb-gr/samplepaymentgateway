@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) 2019. IOWEB TECHNOLOGIES
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+
+
+    <router id="standard" >
+        <route id="ioweb_eurobank" frontName="ioweb_eurobank">
+            <module name="Ioweb_Eurobank" />
+        </route>
+    </router>
+</config>

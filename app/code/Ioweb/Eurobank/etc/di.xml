@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="EurobankFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">Ioweb\Eurobank\Model\Eurobank::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">Ioweb\Eurobank\Block\Form</argument>
+            <argument name="infoBlockType" xsi:type="string">Magento\Payment\Block\ConfigurableInfo</argument>
+            <argument name="valueHandlerPool" xsi:type="object">EurobankValueHandlerPool</argument>
+            <argument name="validatorPool" xsi:type="object">EurobankValidatorPool</argument>
+            <argument name="commandPool" xsi:type="object">EurobankCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="EurobankValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">EurobankConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="EurobankConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">Magento\Payment\Gateway\Config\Config</argument>
+        </arguments>
+    </virtualType>
+
+
+    <virtualType name="EurobankValidatorPool" type="Magento\Payment\Gateway\Validator\ValidatorPool">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <!--<item name="country" xsi:type="string">Magento\Payment\Gateway\Validator\CountryValidator</item>-->
+            </argument>
+        </arguments>
+    </virtualType>
+
+
+    <virtualType name="EurobankCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <!--<item name="capture" xsi:type="string">EurobankCaptureGatewayCommand</item>-->
+                <item name="authorize" xsi:type="string">EurobankAuthorizeGatewayCommand</item>
+                <item name="redirect" xsi:type="string">EurobankRedirectGatewayCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!--<virtualType name="EurobankCaptureGatewayCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">-->
+        <!--<arguments>-->
+            <!--<argument name="requestBuilder" xsi:type="object">Ioweb\Eurobank\Model\Request\Capture</argument>-->
+            <!--<argument name="handler" xsi:type="object">Ioweb\Eurobank\Model\Response\Capture</argument>-->
+            <!--<argument name="transferFactory" xsi:type="object">Ioweb\Eurobank\Model\Gateway\Http\TransferFactory</argument>-->
+        <!--</arguments>-->
+    <!--</virtualType>-->
+    <virtualType name="EurobankAuthorizeGatewayCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">Ioweb\Eurobank\Model\Request\Authorize</argument>
+            <!--<argument name="handler" xsi:type="object">Ioweb\Eurobank\Model\Response\Authorize</argument>-->
+            <argument name="transferFactory" xsi:type="object">Ioweb\Eurobank\Model\Gateway\Http\TransferFactory</argument>
+        </arguments>
+    </virtualType>
+    
+    <virtualType name="EurobankRedirectGatewayCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">Ioweb\Eurobank\Model\Request\Redirect</argument>
+            <argument name="transferFactory" xsi:type="object">Ioweb\Eurobank\Model\Gateway\Http\TransferFactory</argument>
+        </arguments>
+    </virtualType>
+</config>

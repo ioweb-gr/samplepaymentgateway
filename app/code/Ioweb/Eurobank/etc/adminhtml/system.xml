@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <!--
+      ~ Copyright (c) 2019. IOWEB TECHNOLOGIES
+      -->
+
+    <system>
+        <section id="payment">
+            <group id="ioweb_eurobank" translate="label comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>IOWEB EUROBANK</label>
+                <comment><![CDATA[Accept credit/debit cards in your Magento store by redirecting customers to the bank's safe environment.]]></comment>
+                <attribute type="displayIn">other_payment_methods</attribute>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable this Solution</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" type="text" translate="label" sortOrder="20" showInWebsite="1" showInStore="1" showInDefault="1">
+                    <label>Credit / Debit Card via Eurobank</label>
+                </field>
+                <field id="payment_action" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment Action</label>
+                    <source_model>Ioweb\Eurobank\Model\Adminhtml\Source\PaymentAction</source_model>
+                </field>
+                <field id="order_status" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order Status</label>
+                    <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+                </field>
+                <field id="allowspecific" translate="label" type="allowspecific" sortOrder="50" showInDefault="1" showInStore="1" showInWebsite="1">
+                    <label>Allow Specific</label>
+                    <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Payment from Specific Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="submit_url" type="text" translate="label" sortOrder="90" showInWebsite="1" showInStore="1" showInDefault="1">
+                    <label>Form Action POST URL</label>
+                    <tooltip>The bank will provide a different action url for testing and live environment</tooltip>
+                </field>
+                <field id="merchant_id" type="text" translate="label" sortOrder="100" showInWebsite="1" showInStore="1" showInDefault="1">
+                    <label>Merchant ID</label>
+                    <tooltip>The bank will provide a different merchant ID for testing and live environment</tooltip>
+                </field>
+                <field id="shared_secret" type="password" translate="label" sortOrder="90" showInWebsite="1" showInStore="1" showInDefault="1">
+                    <label>Shared secret</label>
+                    <tooltip>The bank will provide a secret key for encrypting communication between the two systems. Please do not share this</tooltip>
+                </field>
+                <field id="enable_installments" type="select" translate="label" sortOrder="90" showInWebsite="1" showInStore="1" showInDefault="1">
+                    <label>Enable payment in installments</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="installments" type="text" translate="label" sortOrder="90" showInWebsite="1" showInStore="1" showInDefault="1">
+                    <label>Installment plans</label>
+                    <tooltip>for example 2:200;4:400 will mean maximum 2 installments for orders above 200$ and maximum 4 installments over 400$</tooltip>
+                    <depends>
+                        <field id="enable_installments">1</field>
+                    </depends>
+                </field>
+                <field id="cardlink_lang" type="text" translate="label" sortOrder="90" showInWebsite="1" showInStore="1" showInDefault="1">
+                    <label>Cardlink language</label>
+                </field>
+                <field id="optional_css" type="text" translate="label" sortOrder="90" showInWebsite="1" showInStore="1" showInDefault="1">
+                    <label>CSS URL to include in bank's safe environment</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
